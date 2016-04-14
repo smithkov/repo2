@@ -1,0 +1,107 @@
+#project_homepage:
+#    path:     /
+#    defaults: { _controller: projectAdminBundle:Default:home }
+
+project_admin_homepage:
+    path:     /admin
+    defaults: { _controller: projectAdminBundle:Default:index }
+
+project_admin_area_config:
+    path:     /configure
+    defaults: { _controller: projectAdminBundle:Default:config }
+    
+project_admin_area_create:
+    path:     /admin/area/create
+    defaults: { _controller: projectAdminBundle:Area:create }
+    
+project_admin_area_edit:
+    path:     /admin/area/edit/{id}
+    defaults: { _controller: projectAdminBundle:Area:edit }
+    
+project_admin_area_list:
+    path:     /admin/area/list
+    defaults: { _controller: projectAdminBundle:Area:list }
+    
+project_admin_subarea_list:
+    path:     /admin/subarea/list
+    defaults: { _controller: projectAdminBundle:SubArea:list }
+    
+project_admin_subarea_create:
+    path:     /admin/subarea/create
+    defaults: { _controller: projectAdminBundle:SubArea:create }
+    
+project_admin_subarea_edit:
+    path:     /admin/subarea/edit/{id}
+    defaults: { _controller: projectAdminBundle:SubArea:edit }
+    
+project_admin_areaOfSpecialty_list:
+    path:     /admin/AreaOfSpecialty/list
+    defaults: { _controller: projectAdminBundle:AreaOfSpecialty:list }
+    
+project_admin_areaOfSpecialty_create:
+    path:     /admin/AreaOfSpecialty/create
+    defaults: { _controller: projectAdminBundle:AreaOfSpecialty:create }
+    
+project_admin_areaOfSpecialty_edit:
+    path:     /admin/AreaOfSpecialty/edit/{id}
+    defaults: { _controller: projectAdminBundle:AreaOfSpecialty:edit }
+    
+project_user_register:
+    path:     /user/registration
+    defaults: { _controller: projectAdminBundle:Account:register }
+ 
+project_timeline:
+    path:     /
+    defaults: { _controller: projectAdminBundle:Default:timeline }
+    
+project_user_completeReg:
+    path:     /complete_reg
+    defaults: { _controller: projectAdminBundle:Account:completeReg }
+
+project_admin_ajax_state_list:
+  pattern:  /data/state/list
+  defaults: { _controller: projectAdminBundle:Account:stateList }
+  
+project_admin_ajax_update_lga:
+  pattern:  /update/data/ajax/call
+  defaults: { _controller: projectAdminBundle:Account:updateData }
+  
+project_admin_subArea_list:
+  pattern:  /update/subArea-list
+  defaults: { _controller: projectAdminBundle:Account:subAreaList }
+  
+project_admin_specialty_list:
+  pattern:  /update/specialty-list
+  defaults: { _controller: projectAdminBundle:Account:specialtyList }
+  
+project_login:
+  pattern:  /login
+  defaults: { _controller: projectAdminBundle:Account:login }
+  
+project_upload_photo:
+  path:     /profile_upload_image
+  defaults: { _controller: projectAdminBundle:Account:pictureUpload }
+  
+project_user_detail:
+  path:     /{username}
+  defaults: { _controller: projectAdminBundle:Default:detail }
+  
+project_user_product_create:
+  path:     /product/create
+  defaults: { _controller: projectAdminBundle:Product:create }
+  
+project_user_product_list:
+  path:     /product/list
+  defaults: { _controller: projectAdminBundle:Product:list }
+  
+project_user_productImage_upload:
+  path:     /product/uploadImage/{id}
+  defaults: { _controller: projectAdminBundle:Product:imageUpload}
+  
+project_user_product_delete_image:
+  path:     /product/delete/{id}/{productId}
+  defaults: { _controller: projectAdminBundle:Product:delete }
+  
+project_user_product_detail:
+  path:     /product/detail/{id}
+  defaults: { _controller: projectAdminBundle:Default:productDetail}

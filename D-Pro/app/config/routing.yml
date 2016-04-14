@@ -1,0 +1,4 @@
+project_admin:
+    resource: "@projectAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+

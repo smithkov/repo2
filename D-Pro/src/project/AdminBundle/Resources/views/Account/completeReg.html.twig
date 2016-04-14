@@ -1,0 +1,134 @@
+{% extends "::main.html.twig" %}
+{% block content %}
+    <div class="main-wrapper">
+
+        <!-- start end Page title -->
+        <div class="page-title" style="background-image:url('/bundles/projectadmin/front/images/hero-header/breadcrumb.jpg');">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+
+                        <h1 class="hero-title"></h1>
+
+                        
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end Page title -->
+
+        <div class="content-wrapper">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-3 col-md-3">
+
+                        <aside class="sidebar">
+
+                            <div class="sidebar-inner no-border for-static-page">
+
+                                <div class="sidebar-module">
+
+                                    <h4 class="sidebar-title">Quick Menu</h4>
+                                    <ul class="static-page-menu">
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li class="active"><a href="static-page.html">Terms &amp; Conditions</a></li>
+                                        <li><a href="static-page.html">Policy Privacy</a></li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </aside>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6">
+
+                        {% if isRegular == 4 %}
+                            <h2>You are not allowed to access this page !</h2>
+                        {% else %}
+                            <form method='POST'>
+                                <div class="static-wrapper">
+
+                                    <div class="form-group">
+                                        <label for="inputPhone">Your Bio Data <span class="font10 text-danger">(required)</span></label>
+                                        {{form_widget(form.bio,{"attr":{"class":"form-control",'id':'inputName'}})}}
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPhone">Sub Area <span class="font10 text-danger">(required)</span></label>
+                                        <select class='cboSubArea form-control'>
+
+                                        </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPhone">Area of specialization <span class="font10 text-danger">(required)</span></label>
+                                        {{form_widget(form.specialty,{"attr":{"class":"form-control cboSpecialty",'id':'inputName'}})}}
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                               {{form_rest(form)}}
+                                <button class='btn btn-primary mt-5' type='submit'>Finish</button>
+                            </form>
+
+                        {% endif %}
+
+
+                    </div>
+                        <div class="col-sm-3 col-md-3"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- end Main Wrapper -->
+    <script>
+        $(function () {
+
+            var subarea = $(".cboSubArea");
+
+         $.post('{{path('project_admin_subArea_list')}}',
+                    function (response) {
+                        subarea.empty();
+                        $.each(response, function (key, value) {
+                            subarea.append("<option value=" + value.id + ">" + value.name + "</option>");
+                        });
+                        getSpecialtyById(subarea.val());
+                        //getLgaByState(state.val());
+                    }, "json");
+            subarea.change(function () {
+
+                getSpecialtyById(subarea.val());
+            });
+            
+            function getSpecialtyById(subAreaId)
+            {
+             $.post('{{path('project_admin_specialty_list')}}',
+                        {subAreaId: subAreaId},
+                function (response) {
+                    $(".cboSpecialty").empty();
+                    $.each(response, function (key, value) {
+                        $(".cboSpecialty").append("<option value=" + value.id + ">" + value.name + "</option>");
+                    });
+                }, "json");
+            }
+        })
+    </script>
+{% endblock %}

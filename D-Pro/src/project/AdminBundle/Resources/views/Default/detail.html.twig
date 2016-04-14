@@ -1,0 +1,319 @@
+{% extends "::main.html.twig" %}
+{% block content %}
+    <!-- start Main Wrapper -->
+    <div class="main-wrapper scrollspy-container">
+
+        <!-- start end Page title -->
+        <div class="page-title detail-page-title" style="background-image:url('/bundles/projectadmin/front/images/detail/header.jpg');">
+
+            <div class="container">
+
+                <div class="flex-row">
+
+                    <div class="flex-column flex-md-8 flex-sm-12">
+
+                        <h1 class="hero-title">{{user.username}}</h1>
+                        <p class="line18">He do subjects prepared bachelor juvenile ye oh. He feelings removing informed he as ignorant we prepared.</p>
+
+                        <ul class="list-col clearfix">
+
+
+                            <li class="fav-box">
+                                <div class="meta">
+                                    <span class="block"><button class="btn btn-fav"><i class="fa fa-heart-o"></i></button></span>
+                                    98 Favorites 
+                                </div>
+                            </li>
+
+                            <li class="duration-box">
+                                <div class="meta">
+                                    <span class="block">4</span>
+                                    Days
+                                </div>
+                                <div class="meta">
+                                    &amp;
+                                </div>
+                                <div class="meta">
+                                    <span class="block">3</span>
+                                    Nights
+                                </div>
+                            </li>
+
+                            <li class="price-box">
+                                <div class="meta">
+                                    <span class="block">$1422</span>
+                                    starting from
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="flex-column flex-md-4 flex-align-bottom flex-sm-12 mt-20-sm">
+                        <div class="text-right text-left-sm">
+                            <a href="#section-5" class="anchor btn btn-primary">Message Now</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end Page title -->
+
+        <div class="breadcrumb-wrapper bg-light-2">
+
+            <div class="container">
+
+                <ol class="breadcrumb-list">
+                    <li><a href="{{path("project_timeline")}}">Timeline</a></li>
+
+                    <li><span>{{user.username}}</span></li>
+                </ol>
+
+            </div>
+
+        </div>
+
+        <div class="content-wrapper">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-9" role="main">
+
+                        <div class="detail-content-wrapper">
+
+                            <div id="section-0" class="detail-content">
+
+                                <div class="section-title text-left">
+                                    <h4>{{user.username}}</h4>
+                                </div>
+
+                                <img src="/bundles/projectadmin/front/images/map-route.jpg" alt="Map" class="map-route" />
+                                <h5>BIO</h5>
+                                {% if not user.path %}
+                                    <img class="img-thumbnail img-responsive" src="{{asset('uploads/images/no_profile.png')}}" style="width: 200px; height: 200px" />
+                                {% else %}
+                                    <img class="img-thumbnail img-responsive" src="{{asset('uploads/images/'~user.path)}}" style="width: 200px; height: 200px" />
+                                {% endif %}
+                                <p>{{user.bio}}</p>
+
+
+
+                            </div>
+                            {% if user.products|length>0 %}
+                                <div id="section-1" class="detail-content">
+
+                                    <div class="section-title text-left">
+                                        <h4>Goods</h4>
+                                    </div>
+                                    <div class="row">
+                                        {% for product in user.products %}
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="thumbnail">
+                                                    {% for image in product.productImages|slice(0, 1) %}
+                                                         <img class="img-thumbnail img-responsive" src="{{asset('uploads/productImages/'~image.path)}}" style="width: 300px; height: 250px" />
+                                                    {% else %}
+                                                          <img style="height: 242px; width: 200px" src="{{asset('uploads/productImages/no_image_available.jpg')}}" alt="...">
+                                                        {% endfor %}
+                                                    <div style="text-align: center" class="caption">
+                                                        <h5>{{product.name|capitalize}}</h5>
+                                                        <p>{{product.description|length > 30 ? user.bio|slice(0, 30) ~ '...' : product.description }}</p>
+                                                        <p><a href="{{path('project_user_product_detail',{'id':product.id})}}" class="btn btn-primary btn-block" role="button">More Details</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                            {% endif %}
+
+                            <div id="section-7" class="detail-content">
+
+                                <div class="section-title text-left">
+                                    <h4>Reviews</h4>
+                                </div>
+
+                                <div class="review-wrapper">
+
+
+
+                                    <div class="review-content">
+
+                                        <div class="row gap-20">
+
+                                            <div class="col-sm-6">
+                                                <h5>There are {{user.ratings|length}} reviews</h5>
+                                            </div>
+
+                                            <div class="col-sm-6 text-right text-left-xs">
+                                                <a href="#leave-comment" class="anchor btn btn-primary btn-inverse btn-sm">Leave comments</a>
+                                            </div>
+
+                                        </div>
+
+
+                                        <ul class="review-list">
+                                            {% for rating in user.ratings %}
+                                                <li class="clearfix">
+                                                    <div class="image img-circle">
+                                                        {% if not user.path %}
+                                                            <img class="img-circle img-responsive" src="{{asset('uploads/images/no_profile.png')}}" style="width: 50px; height: 50px" alt="Man"  />
+                                                        {% else %}
+                                                            <img class="img-circle img-responsive" src="{{asset('uploads/images/'~rating.user.path)}}" style="width: 50px; height: 50px" alt="Man"  />
+                                                        {% endif %}
+
+                                                    </div>
+                                                    <div class="content">
+                                                        <div class="row gap-20 mb-0">
+                                                            <div class="col-sm-9">
+                                                                <h6>{{rating.user.username}} <span>/ from {{rating.user.lga.state.name}}</span></h6>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <p class="review-date">18/03/2016</p>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="review-text">
+
+                                                            <p>{{rating.content}}</p>
+
+
+                                                        </div>
+
+                                                        <div class="review-other">
+
+                                                            <div class="row gap-20 mb-0">
+
+                                                                <div class="col-sm-6">
+
+                                                                    <ul class="social-share-sm">
+
+                                                                        <li><span><i class="fa fa-share-square"></i> share</span></li>
+                                                                        <li class="the-label"><a href="#">Facebook</a></li>
+                                                                        <li class="the-label"><a href="#">Twitter</a></li>
+                                                                        <li class="the-label"><a href="#">Google Plus</a></li>
+
+                                                                    </ul>
+
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+
+                                                                    <ul class="social-share-sm for-useful">
+                                                                        <li><span>Was this review helpful? </span></li>
+                                                                        <li class="the-label"><a href="#"><i class="fa fa-thumbs-up"></i></a> 2</li>
+                                                                        <li class="the-label"><a href="#"><i class="fa fa-thumbs-down"></i></a> 1</li>
+                                                                    </ul>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+
+                                        </ul>
+
+                                        <div class="bt text-center pt-30">
+                                            <a href="#" class="btn btn-primary">Load More</a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="leave-comment" class="detail-content">
+                                {% if userData %}
+                                    <div class="section-title text-left">
+                                        <h4>Leave Your Review</h4>
+                                    </div>
+
+                                    <div class="review-form">
+
+                                        <form method='POST' class="">
+
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-8">
+
+                                                    <div class="form-group">
+                                                        <label>Your Message: </label>
+                                                        {{form_widget(form.content,{"attr":{"class":"form-control",'id':'inputName'}})}}
+                                                    </div>
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                {{form_rest(form)}}
+                                                <div class="col-sm-12 col-md-8 mt-10">
+                                                    <button type='submit' class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                {% else %}
+                                    <h4>Please login to rate {{user.username}} <a href='{{path('project_login')}}' class='btn btn-primary'>Login</a></h4>
+                                {% endif %}
+
+
+                            </div>	
+
+                            <div class="call-to-action">
+
+                                Question? <a href="#" class="btn btn-primary btn-sm btn-inverse">Make an inquiry</a> or call +66 28 878 5452
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-3 hidden-sm hidden-xs">
+
+                        <div class="scrollspy-sidebar sidebar-detail" role="complementary">
+
+                            <ul class="scrollspy-sidenav">
+
+                                <li>
+                                    <ul class="nav">
+                                        <li><a href="#section-0" class="anchor"><strong>Status :</strong>{{user.area.name}}</a></li>
+                                        <li><a href="#section-1" class="anchor"><strong>Specialty :</strong>{% if user.specialty %}{{user.specialty.name}}{% else %}<span>Not specified</span>{% endif %}</a></li>
+                                        <li><a href="#section-2" class="anchor"><strong>State :</strong>{{user.lga.state.name}}</a></li>
+                                        <li><a href="#section-3" class="anchor"><strong>L.G.A :</strong>{{user.lga.name}}</a></li>
+                                        <li><a href="#section-4" class="anchor"><strong>Email :</strong>{{user.email}}</a></li>
+                                        <li><a href="#section-5" class="anchor"><strong>Phone :</strong>{{user.phone}}</a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+                            <a href="#" class="btn btn-primary">Change Search</a>
+
+                            <div style="width: 100%; height: 20px;"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

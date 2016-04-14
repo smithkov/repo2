@@ -1,0 +1,54 @@
+{% extends "::base.html.twig" %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Icons</li>
+            </ol>
+        </div><!--/.row-->
+       
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">List of Specialization</h1>
+            </div>
+        </div><!--/.row-->
+
+      
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="{{path("project_admin_area_create")}}" class="btn btn-primary">Create New</a><hr>
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <table data-toggle="table" data-url="tables/data1.json"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                                <thead>
+                                    
+                                    <tr>
+                                        <th data-field="name"  data-sortable="true">Name</th>
+                                        <th></th>
+                                       
+                                    </tr>
+                                    
+                                </thead>
+                                <tbody>
+                                    {% for item in list %} 
+                                  <tr>
+                                    <td>{{item.name}}</td>
+                                    <td><a href="{{path('project_admin_area_edit',{id:item.id})}}"><img style="height: 30px;width: 30px" src="{{ asset("bundles/projectadmin/iconImage/graphic_design.png")}}"/></a></td>
+                                 </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div><!-- /.col-->
+        </div><!-- /.row -->
+
+    </div><!--/.main-->
+
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends "::main.html.twig" %}
+{% block content %}
+    <!-- start Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- start end Page title -->
+        <div class="page-title" style="background-image:url('/bundles/projectadmin/front/images/hero-header/breadcrumb.jpg');">
+
+
+
+        </div>
+        <!-- end Page title -->
+
+        <div class="content-wrapper">
+            <div class="section pt-60 pb-0">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+
+                            <div class="section-title">
+
+                                <h3>Register</h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <form method="POST" class="contact-form-wrapper" data-toggle="validator">
+
+                        <div class="row">
+
+                            <div class="col-sm-4">
+
+                                <h5 class="heading mt-5">Let's Interact</h5>
+                                <p>May indulgence difficulty ham can put especially. Bringing remember for supplied her why was confined. Middleton principle did she procuring extensive believing add. Weather adapted prepare oh is calling.</p>
+
+                                <div class="boxed-social mb-30-xs clearfix">
+
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-8">
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label for="">Designation <span class="font10 text-danger">(required)</span></label>
+                                            {{form_widget(form.area,{"attr":{"class":"form-control",'id':'inputEmail'}})}}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputName">Your Username <span class="font10 text-danger">(required)</span></label>
+
+                                            {{form_widget(form.username,{"attr":{"class":"form-control",'id':'inputName','data-error':'Your username is required'}})}}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputName">Your Password <span class="font10 text-danger">(required)</span></label>
+
+                                            {{form_widget(form.password.first,{"attr":{"class":"form-control",'id':'inputName','data-error':'Your password is required'}})}}
+                                            {{form_errors(form.password.first)}}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputName">Confirm Password <span class="font10 text-danger">(required)</span></label>
+
+                                            {{form_widget(form.password.second,{"attr":{"class":"form-control",'id':'inputName','data-error':'Confirm password is required'}})}}
+                                            {{form_errors(form.password.second)}}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPhone">Your Phone <span class="font10 text-danger">(required)</span></label>
+                                            {{form_widget(form.phone,{"attr":{"class":"form-control",'id':'inputName','data-error':'Your phone number is required'}})}}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail">Your Email <span class="font10 text-danger">(required)</span></label>
+                                            {{form_widget(form.email,{"attr":{"class":"form-control",'id':'inputEmail','data-error':'Your email is required'}})}}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>State of Residence</label>
+                                            <select name="state" class="cboState form-control">
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>LGA</label>
+                                            {{form_widget(form.lga,{"attr":{"class":"form-control cboLGA"}})}}
+                                            {{form_errors(form.lga)}}
+
+                                        </div>
+                                        {{form_rest(form)}}
+                                        <button type="submit" class="btn btn-primary mt-5">Register</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <script>
+        $(function () {
+
+            var state = $(".cboState");
+
+            $.post('{{path('project_admin_ajax_state_list')}}',
+                    {stateId: state.val()},
+            function (response) {
+                state.empty();
+                $.each(response, function (key, value) {
+                    state.append("<option value=" + value.id + ">" + value.name + "</option>");
+                });
+                //getLgaByState(state.val());
+            }, "json");
+            state.change(function () {
+                getLgaByState(state.val());
+            });
+            function getLgaByState(stateId)
+            {
+                $.post('{{path('project_admin_ajax_update_lga')}}',
+                        {stateId: stateId},
+                function (response) {
+                    $(".cboLGA").empty();
+                    $.each(response, function (key, value) {
+                        $(".cboLGA").append("<option value=" + value.id + ">" + value.name + "</option>");
+                    });
+                }, "json");
+            }
+        })
+    </script>
+{% endblock %}

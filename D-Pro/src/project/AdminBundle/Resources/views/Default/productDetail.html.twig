@@ -1,0 +1,144 @@
+{% extends "::main.html.twig" %}
+{% block content %}
+    <!-- start Main Wrapper -->
+    <div class="main-wrapper scrollspy-container">
+
+        <!-- start end Page title -->
+        <div class="page-title detail-page-title" style="background-image:url('/bundles/projectadmin/front/images/detail/header.jpg');">
+
+            <div class="container">
+
+                <div class="flex-row">
+
+                    <div class="flex-column flex-md-8 flex-sm-12">
+
+                        <h1 class="hero-title">{{product.name}}</h1>
+                        <p class="line18">He do subjects prepared bachelor juvenile ye oh. He feelings removing informed he as ignorant we prepared.</p>
+
+                        <ul class="list-col clearfix">
+
+
+                            <li class="fav-box">
+                                <div class="meta">
+                                    <span class="block"><button class="btn btn-fav"><i class="fa fa-heart-o"></i></button></span>
+                                    98 Favorites 
+                                </div>
+                            </li>
+
+                            <li class="duration-box">
+                                <div class="meta">
+                                    <span class="block">4</span>
+                                    Days
+                                </div>
+                                <div class="meta">
+                                    &amp;
+                                </div>
+                                <div class="meta">
+                                    <span class="block">3</span>
+                                    Nights
+                                </div>
+                            </li>
+
+                            <li class="price-box">
+                                <div class="meta">
+                                    <span class="block">$1422</span>
+                                    starting from
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="flex-column flex-md-4 flex-align-bottom flex-sm-12 mt-20-sm">
+                        <div class="text-right text-left-sm">
+                            <a href="#section-5" class="anchor btn btn-primary">Message Now</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end Page title -->
+
+        <div class="breadcrumb-wrapper bg-light-2">
+
+            <div class="container">
+
+                <ol class="breadcrumb-list">
+                    <li><a href="{{path("project_timeline")}}">Timeline</a></li>
+
+                    <li><span>{{product.name}}</span></li>
+                </ol>
+
+            </div>
+
+        </div>
+
+        <div class="content-wrapper">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-9" role="main">
+
+                        <div class="detail-content-wrapper">
+
+                            <div id="section-0" class="detail-content">
+
+                                <ul class="scrollspy-sidenav">
+
+                                    <li>
+                                        <ul class="nav">
+                                            <li><a href="#section-0" class="anchor"><strong>Name :</strong>{{product.name}}</a></li>
+                                            <li><a href="#section-1" class="anchor"><strong>Description :</strong>{{product.description}}</a></li>
+                                            <li><a href="#section-2" class="anchor"><strong>Price :</strong>{{product.price}}</a></li>
+
+
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div id="section-1" class="detail-content">
+
+                                <div class="section-title text-left">
+                                    <h4>Product Images</h4>
+                                </div>
+                                <div class="row">
+                                    {% for image in product.productImages %}
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="thumbnail">
+                                                    <img class="img-thumbnail img-responsive" src="{{asset('uploads/productImages/'~image.path)}}" style="width: 300px; height: 250px" />
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <img style="height: 242px; width: 200px" src="{{asset('uploads/productImages/no_image_available.jpg')}}" alt="...">
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+
+
+
+
+                           
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

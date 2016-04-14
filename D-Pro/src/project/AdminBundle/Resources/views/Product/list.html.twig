@@ -1,0 +1,55 @@
+{% extends "::main.html.twig" %}
+{% block content %}
+    <!-- start Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- start end Page title -->
+        <div class="page-title" style="background-image:url('/bundles/projectadmin/front/images/hero-header/breadcrumb.jpg');">
+
+
+
+        </div>
+        <!-- end Page title -->
+
+        <div class="content-wrapper">
+            <div class="section pt-60 pb-0">
+                <div class="row">
+
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-8">
+                        <a href="{{path('project_user_product_create')}}" class="btn btn-success">Add Product</a>
+                    <hr/>
+                        <div class="row">
+                            <table class="table table-striped table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th></th>
+                                        <th></th>
+                                         <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product in products %}
+                                        <tr>
+                                            <td>{{product.name}}</td>
+                                            <td>{{product.description}}</td>
+                                            <td><a>Edit  <i class="fa fa-edit"></i></a></td>
+                                            <td><a>Delete  <i class="fa fa-close"></i></a></td>
+                                            <td><a href="{{path('project_user_productImage_upload',{id:product.id})}}">View Images {{product.productimages|length}} <i class="fa fa-binoculars"></i></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                     <div class="col-sm-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
